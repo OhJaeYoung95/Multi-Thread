@@ -33,7 +33,7 @@ namespace ServerCore
             _lock3.EnterReadLock();
 
             _lock3.ExitReadLock();
-            lock(_lock)
+            lock (_lock)
             {
 
             }
@@ -46,7 +46,7 @@ namespace ServerCore
             _lock3.EnterWriteLock();
 
             _lock3.ExitWriteLock();
-            lock(_lock)
+            lock (_lock)
             {
 
             }
