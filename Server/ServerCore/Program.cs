@@ -89,9 +89,27 @@ namespace ServerCore
             Console.WriteLine(count);
         }
         #endregion
+
+        #region Thread Local Storage
+
+        static ThreadLocal<string> ThreadName = new ThreadLocal<string>(() => { return $"My Name Is {Thread.CurrentThread.ManagedThreadId}"; });
+
+        static void WhoAmI()
+        {
+            bool repeat = ThreadName.IsValueCreated;
+
+            if(repeat)
+                Console.WriteLine(ThreadName.Value + "(repeat)");
+            else
+                Console.WriteLine(ThreadName.Value);
+        }
+
+        #endregion
         static void Main(string[] args)
         {
-            ReaderWriterLockPractice();
+            ThreadPool.SetMinThreads(1, 1);
+            ThreadPool.SetMaxThreads(3, 3);
+            Parallel.Invoke(WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI);
         }
     }
 }
